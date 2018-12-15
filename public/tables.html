@@ -66,3 +66,77 @@
   </div>
 
 </body>
+
+
+<script type="text/javascript">
+function runTableQuery() {
+  var currentURL = window.location.origin;
+
+  $.ajax({url: currentURL + "/api/tables", method: "GET"})
+    .done(function(tableData) {
+      console.log("------------")
+      console.log("URL: " + currentURL + "/api/tables")
+      console.log("------------")
+      console.log(tableData)
+      console.log("------------")
+
+      for (var i = 0; i < tableData.length; i++) {
+
+        // Get a reference to the tableList element and populate it with tables
+        var tableList = $("#tableList");
+
+        // Then display the fields in the HTML (Section Name, Date, URL)
+        var listItem = $("<li class='list-group-item mt-4'>");
+
+        listItem.append(
+          $("<h2>").text("Table #" + (i + 1)),
+          $("<hr>"),
+          $("<h2>").text("ID: " + tableData[i].customerID),
+          $("<h2>").text("Name: " + tableData[i].customerName),
+          $("<h2>").text("Email: " + tableData[i].customerEmail),
+          $("<h2>").text("Phone: " + tableData[i].phoneNumber)
+        );
+
+        tableList.append(listItem);
+      }
+    })
+}
+
+function runWaitlistQuery() {
+  var currentURL = window.location.origin;
+
+  $.ajax({url: currentURL + "/api/waitlist", method: "GET"})
+    .done(function(waitListData) {
+      console.log("------------")
+      console.log("URL: " + currentURL + "/api/waitlist")
+      console.log("------------")
+      console.log(waitListData)
+      console.log("------------")
+
+      for (var i = 0; i < waitListData.length; i++) {
+
+        // Get a reference to the waitList element and populate it with tables
+        var waitList = $("#waitList");
+
+        // Then display the fields in the HTML (Section Name, Date, URL)
+        var listItem = $("<li class='list-group-item mt-4'>");
+
+        listItem.append(
+          $("<h2>").text("Table #" + (i + 1)),
+          $("<hr>"),
+          $("<h2>").text("ID: " + waitListData[i].customerID),
+          $("<h2>").text("Name: " + waitListData[i].customerName),
+          $("<h2>").text("Email: " + waitListData[i].customerEmail),
+          $("<h2>").text("Phone: " + waitListData[i].phoneNumber)
+        );
+
+        waitList.append(listItem);
+      }
+    })
+}
+
+
+runTableQuery();
+runWaitlistQuery();
+
+</script>
